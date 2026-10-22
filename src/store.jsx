@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { createInitialData } from './data';
+import { createInitialData, doctors } from './data';
 
 const DATA_KEY = 'carepoint-demo-data-v2';
 const SESSION_KEY = 'carepoint-demo-session-v2';
@@ -10,7 +10,18 @@ function readData() {
     const saved = localStorage.getItem(DATA_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
-      if (parsed.appointments && parsed.prescriptions && parsed.followups && parsed.profile) return parsed;
+      if (parsed.appointments && parsed.prescriptions && parsed.followups && parsed.profile) {
+        const doctorVisitTypes = new Set(parsed.appointments.map((appointment) => `${appointment.doctorId}:${appointment.status}`));
+        const missingDoctorVisits = createInitialData().appointments.filter((appointment) =>
+          doctors.some((doctor) => doctor.id === appointment.doctorId) && !doctorVisitTypes.has(`${appointment.doctorId}:${appointment.status}`),
+        );
+        if (missingDoctorVisits.length) {
+          const upgraded = { ...parsed, appointments: [...parsed.appointments, ...missingDoctorVisits] };
+          localStorage.setItem(DATA_KEY, JSON.stringify(upgraded));
+          return upgraded;
+        }
+        return parsed;
+      }
     }
   } catch { /* start with the sample set if browser data is malformed */ }
   const initial = createInitialData();
