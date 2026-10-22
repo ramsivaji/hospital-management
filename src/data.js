@@ -29,12 +29,12 @@ export const createInitialData = () => {
     appointment('apt-demo-05', 'Jamie Rivera', 'patient@demo.com', 'doc-ethan', offsetDate(5), '10:00', 'Seasonal wellness visit', 'Upcoming'),
     appointment('apt-demo-06', 'Riley Chen', 'riley@demo.com', 'doc-james', offsetDate(1), '11:00', 'Skin health consultation', 'Upcoming'),
     appointment('apt-demo-07', 'Morgan Lee', 'morgan@demo.com', 'doc-aisha', offsetDate(2), '10:00', 'Child wellness check', 'Upcoming'),
-    appointment('apt-demo-08', 'Avery Patel', 'avery@demo.com', 'doc-noah', offsetDate(3), '13:30', 'Knee pain consultation', 'Upcoming'),
-    appointment('apt-demo-09', 'Taylor Kim', 'taylor@demo.com', 'doc-sofia', offsetDate(4), '09:30', 'Headache evaluation', 'Upcoming'),
+    appointment('apt-demo-08', 'Riley Chen', 'riley@demo.com', 'doc-noah', offsetDate(3), '13:30', 'Knee pain consultation', 'Upcoming'),
+    appointment('apt-demo-09', 'Morgan Lee', 'morgan@demo.com', 'doc-sofia', offsetDate(4), '09:30', 'Headache evaluation', 'Upcoming'),
     appointment('apt-demo-10', 'Riley Chen', 'riley@demo.com', 'doc-james', offsetDate(-8), '14:00', 'Follow-up for skin treatment', 'Completed'),
     appointment('apt-demo-11', 'Morgan Lee', 'morgan@demo.com', 'doc-aisha', offsetDate(-6), '09:00', 'Routine wellness review', 'Completed'),
-    appointment('apt-demo-12', 'Avery Patel', 'avery@demo.com', 'doc-noah', offsetDate(-10), '11:00', 'Mobility assessment', 'Completed'),
-    appointment('apt-demo-13', 'Taylor Kim', 'taylor@demo.com', 'doc-sofia', offsetDate(-7), '15:00', 'Neurology review', 'Completed'),
+    appointment('apt-demo-12', 'Riley Chen', 'riley@demo.com', 'doc-noah', offsetDate(-10), '11:00', 'Mobility assessment', 'Completed'),
+    appointment('apt-demo-13', 'Morgan Lee', 'morgan@demo.com', 'doc-sofia', offsetDate(-7), '15:00', 'Neurology review', 'Completed'),
     appointment('apt-demo-14', 'Jamie Rivera', 'patient@demo.com', 'doc-ethan', offsetDate(-9), '08:30', 'General wellness check', 'Completed'),
   ];
   return {

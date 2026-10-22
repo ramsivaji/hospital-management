@@ -11,12 +11,39 @@ function readData() {
     if (saved) {
       const parsed = JSON.parse(saved);
       if (parsed.appointments && parsed.prescriptions && parsed.followups && parsed.profile) {
-        const doctorVisitTypes = new Set(parsed.appointments.map((appointment) => `${appointment.doctorId}:${appointment.status}`));
+        const existingPatients = {
+          'apt-demo-08': { name: 'Riley Chen', email: 'riley@demo.com' },
+          'apt-demo-09': { name: 'Morgan Lee', email: 'morgan@demo.com' },
+          'apt-demo-12': { name: 'Riley Chen', email: 'riley@demo.com' },
+          'apt-demo-13': { name: 'Morgan Lee', email: 'morgan@demo.com' },
+        };
+        const withExistingPatientNames = (record) => {
+          const patient = existingPatients[record.appointmentId || record.id];
+          if (!patient || (record.patientName === patient.name && record.patientEmail === patient.email)) return record;
+          return {
+            ...record,
+            patientName: patient.name,
+            patientEmail: patient.email,
+            patientId: patient.email === 'patient@demo.com' ? 'patient-demo' : `patient-${patient.email.replace(/[^a-z0-9]/gi, '-')}`,
+          };
+        };
+        const appointments = parsed.appointments.map(withExistingPatientNames);
+        const prescriptions = parsed.prescriptions.map(withExistingPatientNames);
+        const followups = parsed.followups.map(withExistingPatientNames);
+        const dataChanged = appointments.some((appointment, index) => appointment !== parsed.appointments[index])
+          || prescriptions.some((prescription, index) => prescription !== parsed.prescriptions[index])
+          || followups.some((followup, index) => followup !== parsed.followups[index]);
+        const doctorVisitTypes = new Set(appointments.map((appointment) => `${appointment.doctorId}:${appointment.status}`));
         const missingDoctorVisits = createInitialData().appointments.filter((appointment) =>
           doctors.some((doctor) => doctor.id === appointment.doctorId) && !doctorVisitTypes.has(`${appointment.doctorId}:${appointment.status}`),
         );
-        if (missingDoctorVisits.length) {
-          const upgraded = { ...parsed, appointments: [...parsed.appointments, ...missingDoctorVisits] };
+        if (dataChanged || missingDoctorVisits.length) {
+          const upgraded = {
+            ...parsed,
+            appointments: [...appointments, ...missingDoctorVisits],
+            prescriptions,
+            followups,
+          };
           localStorage.setItem(DATA_KEY, JSON.stringify(upgraded));
           return upgraded;
         }
