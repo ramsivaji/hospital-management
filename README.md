@@ -31,6 +31,14 @@ npm run preview
 
 The static production site is written to `dist/`.
 
+## Workflow verification
+
+```sh
+npm test
+```
+
+The workflow test exercises the patient booking → doctor completion → prescription and follow-up → patient review flow in a browser-like DOM.
+
 ## Netlify deployment
 
 Deploy the repository from Netlify with these build settings:

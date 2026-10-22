@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, Eye, EyeOff, HeartPulse, LockKeyhole, Mail, ShieldCheck } from 'lucide-react';
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Brand, Button } from '../components';
@@ -19,6 +19,12 @@ export default function AuthPage() {
   const [password, setPassword] = useState(accounts[isDoctor ? 'doctor' : 'patient'].password);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  useEffect(() => {
+    const account = accounts[role === 'doctor' ? 'doctor' : 'patient'];
+    setEmail(account.email);
+    setPassword(account.password);
+    setError('');
+  }, [role]);
   if (!['patient', 'doctor'].includes(role)) return <Navigate to="/" replace />;
   if (session?.role === role) return <Navigate to={location.state?.from?.startsWith(`/${role}`) ? location.state.from : `/${role}`} replace />;
   const submit = (event) => {
