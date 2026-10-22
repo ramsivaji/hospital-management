@@ -36,6 +36,12 @@ export const createInitialData = () => {
     appointment('apt-demo-12', 'Riley Chen', 'riley@demo.com', 'doc-noah', offsetDate(-10), '11:00', 'Mobility assessment', 'Completed'),
     appointment('apt-demo-13', 'Morgan Lee', 'morgan@demo.com', 'doc-sofia', offsetDate(-7), '15:00', 'Neurology review', 'Completed'),
     appointment('apt-demo-14', 'Jamie Rivera', 'patient@demo.com', 'doc-ethan', offsetDate(-9), '08:30', 'General wellness check', 'Completed'),
+    appointment('apt-demo-15', 'Priya Nair', 'priya.nair@demo.com', 'doc-james', offsetDate(6), '09:30', 'Dermatology consultation', 'Upcoming'),
+    appointment('apt-demo-16', 'Arjun Mehta', 'arjun.mehta@demo.com', 'doc-aisha', offsetDate(7), '12:30', 'Child wellness consultation', 'Upcoming'),
+    appointment('apt-demo-17', 'Sana Iyer', 'sana.iyer@demo.com', 'doc-noah', offsetDate(8), '08:30', 'Orthopedic assessment', 'Upcoming'),
+    appointment('apt-demo-18', 'Kabir Shah', 'kabir.shah@demo.com', 'doc-sofia', offsetDate(9), '11:30', 'Neurology consultation', 'Upcoming'),
+    appointment('apt-demo-19', 'Meera Das', 'meera.das@demo.com', 'doc-ethan', offsetDate(10), '12:00', 'General health check', 'Upcoming'),
+    appointment('apt-demo-20', 'Dev Malhotra', 'dev.malhotra@demo.com', 'doc-olivia', offsetDate(11), '09:00', 'Cardiology consultation', 'Upcoming'),
   ];
   return {
     appointments,

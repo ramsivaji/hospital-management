@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { createInitialData, doctors } from './data';
 
 const DATA_KEY = 'carepoint-demo-data-v2';
@@ -33,14 +33,19 @@ function readData() {
         const dataChanged = appointments.some((appointment, index) => appointment !== parsed.appointments[index])
           || prescriptions.some((prescription, index) => prescription !== parsed.prescriptions[index])
           || followups.some((followup, index) => followup !== parsed.followups[index]);
+        const initialAppointments = createInitialData().appointments;
         const doctorVisitTypes = new Set(appointments.map((appointment) => `${appointment.doctorId}:${appointment.status}`));
-        const missingDoctorVisits = createInitialData().appointments.filter((appointment) =>
+        const missingDoctorVisits = initialAppointments.filter((appointment) =>
           doctors.some((doctor) => doctor.id === appointment.doctorId) && !doctorVisitTypes.has(`${appointment.doctorId}:${appointment.status}`),
         );
-        if (dataChanged || missingDoctorVisits.length) {
+        const appointmentIds = new Set(appointments.map((appointment) => appointment.id));
+        const missingDemoPatients = initialAppointments.filter((appointment) =>
+          /^apt-demo-(1[5-9]|20)$/.test(appointment.id) && !appointmentIds.has(appointment.id),
+        );
+        if (dataChanged || missingDoctorVisits.length || missingDemoPatients.length) {
           const upgraded = {
             ...parsed,
-            appointments: [...appointments, ...missingDoctorVisits],
+            appointments: [...appointments, ...missingDoctorVisits, ...missingDemoPatients],
             prescriptions,
             followups,
           };
@@ -64,7 +69,32 @@ function readSession() {
 export function StoreProvider({ children }) {
   const [data, setData] = useState(readData);
   const [session, setSession] = useState(readSession);
-  useEffect(() => localStorage.setItem(DATA_KEY, JSON.stringify(data)), [data]);
+  const lastSavedData = useRef(null);
+  useEffect(() => {
+    const serialized = JSON.stringify(data);
+    if (serialized === lastSavedData.current) return;
+    localStorage.setItem(DATA_KEY, serialized);
+    lastSavedData.current = serialized;
+  }, [data]);
+  useEffect(() => {
+    const syncData = (event) => {
+      if (event.key !== DATA_KEY) return;
+      if (event.newValue === null) {
+        lastSavedData.current = null;
+        setData(createInitialData());
+        return;
+      }
+      try {
+        const incoming = JSON.parse(event.newValue);
+        if (incoming.appointments && incoming.prescriptions && incoming.followups && incoming.profile) {
+          lastSavedData.current = event.newValue;
+          setData(incoming);
+        }
+      } catch { /* ignore malformed updates from another tab */ }
+    };
+    window.addEventListener('storage', syncData);
+    return () => window.removeEventListener('storage', syncData);
+  }, []);
   useEffect(() => {
     if (session) localStorage.setItem(SESSION_KEY, JSON.stringify(session));
     else localStorage.removeItem(SESSION_KEY);
