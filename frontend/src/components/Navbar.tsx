@@ -27,7 +27,11 @@ export const Navbar: React.FC = () => {
           maxWidth: '1200px',
           margin: '0 auto',
           padding: '0 var(--space-4)',
-          height: '64px',
+          minHeight: '64px',
+          height: 'auto',
+          minWidth: 0,
+          flexWrap: 'wrap',
+          rowGap: 'var(--space-2)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -80,6 +84,9 @@ export const Navbar: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             gap: 'var(--space-6)',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            padding: 'var(--space-2) 0',
           }}
         >
           <Link
@@ -130,6 +137,8 @@ export const Navbar: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             gap: 'var(--space-3)',
+            flexWrap: 'wrap',
+            justifyContent: 'flex-end',
           }}
         >
           {/* Theme toggle button */}

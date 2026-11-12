@@ -67,9 +67,11 @@ export const LoginPage: React.FC = () => {
         style={{
           flex: 1,
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'center',
-          padding: 'var(--space-8) var(--space-4)',
+          minHeight: 'calc(100vh - 64px)',
+          padding: 'clamp(32px, 8vh, 72px) var(--space-4) var(--space-12)',
+          overflowY: 'auto',
         }}
       >
         <div style={{ width: '100%', maxWidth: '440px' }}>
@@ -135,7 +137,7 @@ export const LoginPage: React.FC = () => {
                 variants={containerVariants}
                 initial="hidden"
                 animate="show"
-                style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}
+                style={{ display: 'flex', flexDirection: 'column', gap: 0 }}
               >
                 {error && (
                   <motion.div
@@ -190,53 +192,6 @@ export const LoginPage: React.FC = () => {
                 </motion.div>
               </motion.div>
             </form>
-
-            {/* Quick Demo Credentials */}
-            <div
-              style={{
-                marginTop: 'var(--space-6)',
-                paddingTop: 'var(--space-4)',
-                borderTop: '1px solid var(--color-separator)',
-                fontSize: 'var(--text-xs)',
-                color: 'var(--color-text-secondary)',
-              }}
-            >
-              <p style={{ fontWeight: 'var(--font-semibold)', marginBottom: 'var(--space-2)' }}>
-                Demo quick logins:
-              </p>
-              <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  onClick={() => {
-                    setEmail('patient@example.com')
-                    setPassword('password123')
-                  }}
-                >
-                  Patient
-                </Button>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  onClick={() => {
-                    setEmail('doctor@clinic.com')
-                    setPassword('password123')
-                  }}
-                >
-                  Doctor
-                </Button>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  onClick={() => {
-                    setEmail('admin@clinic.com')
-                    setPassword('password123')
-                  }}
-                >
-                  Admin
-                </Button>
-              </div>
-            </div>
 
             {/* Footer link */}
             <div

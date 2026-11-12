@@ -75,9 +75,11 @@ export const RegisterPage: React.FC = () => {
         style={{
           flex: 1,
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'center',
-          padding: 'var(--space-8) var(--space-4)',
+          minHeight: 'calc(100vh - 64px)',
+          padding: 'clamp(32px, 8vh, 72px) var(--space-4) var(--space-12)',
+          overflowY: 'auto',
         }}
       >
         <div style={{ width: '100%', maxWidth: '460px' }}>
@@ -146,7 +148,7 @@ export const RegisterPage: React.FC = () => {
                 variants={containerVariants}
                 initial="hidden"
                 animate="show"
-                style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}
+                style={{ display: 'flex', flexDirection: 'column', gap: 0 }}
               >
                 {error && (
                   <motion.div

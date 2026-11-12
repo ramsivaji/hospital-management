@@ -1,7 +1,6 @@
 from django.db.models import Q
 from rest_framework.exceptions import NotFound
 from apps.accounts.models import DoctorProfile
-from apps.clinic.models import Specialty
 
 
 def get_doctor_list(search: str | None = None, specialty_slug: str | None = None):
@@ -26,7 +25,3 @@ def get_doctor_detail(doctor_id: int) -> DoctorProfile:
         )
     except DoctorProfile.DoesNotExist:
         raise NotFound("Doctor not found.")
-
-
-def get_specialty_list():
-    return Specialty.objects.all().order_by("name")

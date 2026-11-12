@@ -12,7 +12,7 @@ from apps.clinic.serializers import (
     DoctorProfileSerializer,
     DoctorDetailSerializer,
 )
-from apps.clinic.selectors import get_doctor_list, get_doctor_detail, get_specialty_list
+from apps.clinic.selectors import get_doctor_list, get_doctor_detail
 
 
 class DoctorListView(ListAPIView):
