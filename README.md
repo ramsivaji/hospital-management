@@ -99,3 +99,22 @@ clinic-booking/
 ## API Docs
 
 When running locally, visit [http://localhost:8000/api/docs/](http://localhost:8000/api/docs/) for the Swagger UI.
+
+## Vercel deployment
+
+Deploy the two projects separately:
+
+1. Import the repository into Vercel and set the frontend project root directory to
+   `frontend`. The included [`frontend/vercel.json`](frontend/vercel.json) builds
+   the Vite app and preserves client-side routes.
+2. Set `VITE_API_URL` in the frontend Vercel project to the deployed backend URL,
+   including `https://` and without a trailing slash.
+3. Set `ALLOWED_HOSTS`, `CORS_ALLOWED_ORIGINS`, and `CSRF_TRUSTED_ORIGINS` in the
+   backend Vercel project. Include the frontend's production URL in the two
+   origin variables.
+4. Set `DATABASE_URL`, `DJANGO_SECRET_KEY`, and `JWT_SIGNING_KEY` in the backend
+   project before deploying.
+
+If `VITE_API_URL` is missing in a production build, the frontend falls back to its
+own origin rather than calling `localhost`; the backend URL should still be
+configured for a split frontend/backend deployment.
