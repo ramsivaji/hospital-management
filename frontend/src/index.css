@@ -1,0 +1,239 @@
+/* ============================================================
+   CLINIC BOOKING — Design Tokens & Global Styles
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Brand colors (Light) */
+  --color-brand-primary: #007AFF;
+  --color-brand-secondary: #5856D6;
+  --color-brand-success: #34C759;
+  --color-brand-warning: #FF9500;
+  --color-brand-danger: #FF3B30;
+
+  /* Neutrals (Light) */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F2F2F7;
+  --color-bg-tertiary: #FFFFFF;
+  --color-text-primary: #000000;
+  --color-text-secondary: rgba(60, 60, 67, 0.6);
+  --color-text-tertiary: rgba(60, 60, 67, 0.3);
+  --color-separator: rgba(60, 60, 67, 0.12);
+
+  /* Status badge backgrounds & foregrounds */
+  --color-status-pending-bg: rgba(255, 149, 0, 0.15);
+  --color-status-pending-fg: #FF9500;
+  --color-status-confirmed-bg: rgba(0, 122, 255, 0.15);
+  --color-status-confirmed-fg: #007AFF;
+  --color-status-completed-bg: rgba(52, 199, 89, 0.15);
+  --color-status-completed-fg: #34C759;
+  --color-status-cancelled-bg: rgba(255, 59, 48, 0.15);
+  --color-status-cancelled-fg: #FF3B30;
+  --color-status-noshow-bg: rgba(60, 60, 67, 0.10);
+  --color-status-noshow-fg: rgba(60, 60, 67, 0.6);
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-xs: 11px;
+  --text-xs-lh: 1.4;
+  --text-sm: 13px;
+  --text-sm-lh: 1.5;
+  --text-base: 15px;
+  --text-base-lh: 1.6;
+  --text-md: 17px;
+  --text-md-lh: 1.5;
+  --text-lg: 22px;
+  --text-lg-lh: 1.3;
+  --text-xl: 28px;
+  --text-xl-lh: 1.2;
+  --text-2xl: 34px;
+  --text-2xl-lh: 1.1;
+  --text-3xl: 48px;
+  --text-3xl-lh: 1.0;
+
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.18);
+
+  /* Motion durations */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+
+  /* Stagger */
+  --stagger-sm: 0.04s;
+  --stagger-md: 0.07s;
+  --stagger-lg: 0.12s;
+}
+
+/* System Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-brand-primary: #0A84FF;
+    --color-brand-secondary: #5E5CE6;
+    --color-brand-success: #30D158;
+    --color-brand-warning: #FF9F0A;
+    --color-brand-danger: #FF453A;
+
+    --color-bg-primary: #000000;
+    --color-bg-secondary: #1C1C1E;
+    --color-bg-tertiary: #2C2C2E;
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: rgba(235, 235, 245, 0.6);
+    --color-text-tertiary: rgba(235, 235, 245, 0.3);
+    --color-separator: #54545899;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.30);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.40);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.50);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.60);
+
+    --color-status-pending-bg: rgba(255, 159, 10, 0.20);
+    --color-status-pending-fg: #FF9F0A;
+    --color-status-confirmed-bg: rgba(10, 132, 255, 0.20);
+    --color-status-confirmed-fg: #0A84FF;
+    --color-status-completed-bg: rgba(48, 209, 88, 0.20);
+    --color-status-completed-fg: #30D158;
+    --color-status-cancelled-bg: rgba(255, 69, 58, 0.20);
+    --color-status-cancelled-fg: #FF453A;
+    --color-status-noshow-bg: rgba(235, 235, 245, 0.10);
+    --color-status-noshow-fg: rgba(235, 235, 245, 0.6);
+  }
+}
+
+/* Explicit data-theme="dark" attribute */
+[data-theme="dark"] {
+  --color-brand-primary: #0A84FF;
+  --color-brand-secondary: #5E5CE6;
+  --color-brand-success: #30D158;
+  --color-brand-warning: #FF9F0A;
+  --color-brand-danger: #FF453A;
+
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #1C1C1E;
+  --color-bg-tertiary: #2C2C2E;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: rgba(235, 235, 245, 0.6);
+  --color-text-tertiary: rgba(235, 235, 245, 0.3);
+  --color-separator: #54545899;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.40);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.50);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.60);
+
+  --color-status-pending-bg: rgba(255, 159, 10, 0.20);
+  --color-status-pending-fg: #FF9F0A;
+  --color-status-confirmed-bg: rgba(10, 132, 255, 0.20);
+  --color-status-confirmed-fg: #0A84FF;
+  --color-status-completed-bg: rgba(48, 209, 88, 0.20);
+  --color-status-completed-fg: #30D158;
+  --color-status-cancelled-bg: rgba(255, 69, 58, 0.20);
+  --color-status-cancelled-fg: #FF453A;
+  --color-status-noshow-bg: rgba(235, 235, 245, 0.10);
+  --color-status-noshow-fg: rgba(235, 235, 245, 0.6);
+}
+
+/* Explicit data-theme="light" attribute */
+[data-theme="light"] {
+  --color-brand-primary: #007AFF;
+  --color-brand-secondary: #5856D6;
+  --color-brand-success: #34C759;
+  --color-brand-warning: #FF9500;
+  --color-brand-danger: #FF3B30;
+
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F2F2F7;
+  --color-bg-tertiary: #FFFFFF;
+  --color-text-primary: #000000;
+  --color-text-secondary: rgba(60, 60, 67, 0.6);
+  --color-text-tertiary: rgba(60, 60, 67, 0.3);
+  --color-separator: rgba(60, 60, 67, 0.12);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.18);
+
+  --color-status-pending-bg: rgba(255, 149, 0, 0.15);
+  --color-status-pending-fg: #FF9500;
+  --color-status-confirmed-bg: rgba(0, 122, 255, 0.15);
+  --color-status-confirmed-fg: #007AFF;
+  --color-status-completed-bg: rgba(52, 199, 89, 0.15);
+  --color-status-completed-fg: #34C759;
+  --color-status-cancelled-bg: rgba(255, 59, 48, 0.15);
+  --color-status-cancelled-fg: #FF3B30;
+  --color-status-noshow-bg: rgba(60, 60, 67, 0.10);
+  --color-status-noshow-fg: rgba(60, 60, 67, 0.6);
+}
+
+/* ============================================================
+   RESET & BASE STYLES
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: var(--text-base-lh);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--duration-base) ease, color var(--duration-base) ease;
+}
+
+a {
+  color: var(--color-brand-primary);
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,57 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Lint backend (ruff)
+        run: pip install ruff && ruff check backend/
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Lint frontend (ESLint)
+        run: cd frontend && npm ci && npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run backend tests
+        run: pip install -r backend/requirements-dev.txt && cd backend && pytest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run frontend tests
+        run: cd frontend && npm ci && npm test -- --run
+
+  contract-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check API contract drift
+        run: |
+          pip install -r backend/requirements.txt
+          cd backend && python manage.py spectacular --file ../openapi.yaml.new
+          diff openapi.yaml openapi.yaml.new
